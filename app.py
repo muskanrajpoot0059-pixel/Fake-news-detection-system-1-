@@ -6,11 +6,7 @@ import re
 import string
 import google.generativeai as genai
 NEWS_API_KEY = st.secrets["NEWS_API_KEY"]
-GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 
-genai.configure(api_key=GEMINI_API_KEY)
-
-model = genai.GenerativeModel("gemini-2.5-flash")
 
 
 
@@ -83,35 +79,6 @@ def verify_online(news):
         return data.get("articles", [])
 
     return []
-def explain_prediction(news, prediction):
-
-    prompt = f"""
-You are helping explain the output of a machine learning fake news detection project.
-
-The machine learning model predicted:
-
-{prediction}
-
-News Article:
-
-{news}
-
-Do NOT change the prediction.
-
-Only explain:
-
-1. Why the model might have predicted this.
-2. Mention some important keywords found in the article.
-3. Explain in simple language (4-5 lines).
-"""
-
-    try:
-        response = model.generate_content(prompt)
-        return response.text
-
-    except Exception as e:
-        return f"Unable to generate explanation: {e}"
-
 
 # -----------------------------
 # Streamlit Page

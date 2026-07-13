@@ -4,7 +4,7 @@ import pickle
 import pandas as pd
 import re
 import string
-import google.generativeai as genai
+
 NEWS_API_KEY = st.secrets["NEWS_API_KEY"]
 
 
